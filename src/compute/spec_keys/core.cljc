@@ -17,7 +17,8 @@
         combine-composite-specs (fn [forms]
                                   (into #{} (mapcat parse-spec-keys) forms))]
     (case form-sym
-      clojure.spec.alpha/keys
+      (clojure.spec.alpha/keys
+        cljs.spec.alpha/keys)
       (->> (rest form-args)
            (take-nth 2)
            (flatten)
@@ -25,11 +26,14 @@
            (set))
 
       (clojure.spec.alpha/merge
-        clojure.spec.alpha/and)
+        cljs.spec.alpha/merge
+        clojure.spec.alpha/and
+        cljs.spec.alpha/and)
       (combine-composite-specs form-args)
 
 
-      clojure.spec.alpha/or
+      (clojure.spec.alpha/or
+        cljs.spec.alpha/or)
       (combine-composite-specs (->> (rest form-args) (take-nth 2)))
 
       nil)))
