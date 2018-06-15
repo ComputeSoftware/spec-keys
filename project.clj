@@ -1,4 +1,4 @@
-(defproject compute/spec-keys "0.1.1-SNAPSHOT"
+(defproject compute/spec-keys "0.1.1"
   :description "Get the keys from a Spec."
   :url "https://github.com/ComputeSoftware/spec-keys"
   :license {:name "Eclipse Public License"
