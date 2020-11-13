@@ -5,7 +5,7 @@ A small library that parses a Spec form and returns a set of keys used.
 ## Install
 
 ```clojure
-[compute/spec-keys "0.1.1"]
+[compute/spec-keys "0.1.2"]
 ```
 
 ## Usage

@@ -5,7 +5,7 @@
 (defn spec-form
   [keyword-or-form]
   (if (or (keyword? keyword-or-form)
-          (s/spec? keyword-or-form))
+        (s/spec? keyword-or-form))
     (s/form keyword-or-form)
     keyword-or-form))
 
@@ -20,10 +20,20 @@
       (clojure.spec.alpha/keys
         cljs.spec.alpha/keys)
       (->> (rest form-args)
-           (take-nth 2)
-           (flatten)
-           (filter keyword?)
-           (set))
+        (take-nth 2)
+        (flatten)
+        (filter keyword?)
+        (set))
+
+      ;; TODO: support cljs
+      #?@(:clj
+          [(clojure.spec.alpha/multi-spec
+             cljs.spec.alpha/multi-spec)
+           (let [multf @(resolve (first form-args))]
+             (combine-composite-specs
+               (map (fn [[_ multi-impl-f]]
+                      (multi-impl-f nil))
+                 (methods multf))))])
 
       (clojure.spec.alpha/merge
         cljs.spec.alpha/merge

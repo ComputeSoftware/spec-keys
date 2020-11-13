@@ -1,2 +1,4 @@
-{:paths ["src"]
- :deps  {}}
+{:paths   ["src"]
+ :deps    {}
+ :aliases {:jar {:extra-deps {seancorfield/depstar {:mvn/version "1.1.133"}}
+                 :main-opts  ["-m" "hf.depstar.jar" "lib.jar"]}}}
